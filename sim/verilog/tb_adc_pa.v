@@ -54,6 +54,40 @@ end
 
    #100; //Сброс
     rst_i =0;
+
+    #10
+    // Запись в регистр управления
+    axi_en_i = 1;
+    axi_we_i = 1;
+    axi_addr_i = 8'h0;
+    axi_data_i = 32'h3; // Разрешение работы и прерываний
+    #10
+    axi_en_i = 0;
+
+    // Чтение регистра управления
+    axi_en_i = 1;
+    axi_we_i = 0;
+    axi_addr_i = 8'h0;
+    #10
+    $display("Control reg: %h" , axi_data_o);
+    axi_en_i = 0;
+
+    // Запись в  калибровочный регистр 0
+    axi_en_i = 1;
+    axi_we_i = 1;
+    axi_addr_i = 8'h8;
+    axi_data_i = 32'h12345678; // Разрешение работы и прерываний
+    #10
+    axi_en_i = 0;
+
+    // Чтение калибровочного регистра 0
+    axi_en_i = 1;
+    axi_we_i = 0;
+    axi_addr_i = 8'h8;
+    #10
+    $display("Calib reg 0: %h" , axi_data_o);
+    axi_en_i = 0;
+
    #100; 
     $finish;
    end

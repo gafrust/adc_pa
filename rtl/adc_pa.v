@@ -46,6 +46,34 @@ module adc_pa(
         end
     end
 
+
+always @(posedge clk_120_i) begin
+    if(!rst_i && axi_en_i) begin
+       if(axi_we_i) begin
+         // Запись данных
+         case (axi_addr_i[7:0])
+             8'h0: control_reg <= axi_data_i;
+             8'h4:; //Регистр только для чтения
+             8'h8: calib_reg[0] <= axi_data_i;
+             8'hc: calib_reg[1] <= axi_data_i;
+             default: ;
+         endcase
+       end else begin
+         // Чтение данных
+         case (axi_addr_i[7:0])
+             8'h0: axi_data_o <= control_reg;
+             8'h4: axi_data_o <= axi_data_o; 
+             8'h8: axi_data_o <= calib_reg[0];
+             8'hc: axi_data_o <= calib_reg[1];
+             default: axi_data_o <= 32'h0;
+         endcase
+         axi_vd_o <= 1'b1;
+       end
+    end else begin
+         axi_vd_o <= 1'b0;
+        
+    end
+end
     
     
     
