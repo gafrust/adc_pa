@@ -75,6 +75,22 @@ always @(posedge clk_120_i) begin
     end
 end
     
-    
+// Логика деления частоты из 120 Мгц до 10 Мгц    
+reg [3:0] adc_sck_counter;
+
+always @(posedge clk_120_i or posedge rst_i) begin
+    if(rst_i) begin
+      adc_sck_counter <= 4'd0;
+      adc_sck_o <= 1'b0;
+    end else begin
+      adc_sck_counter <= adc_sck_counter + 1;
+      if(adc_sck_counter == 4'd5) begin
+        adc_sck_counter <= 4'h0;
+        adc_sck_o <= ~adc_sck_o;
+      end
+    end
+end
+
+
     
 endmodule /* adc_pa */
