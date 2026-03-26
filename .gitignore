@@ -11,6 +11,7 @@
 !*.txt
 !*.sh
 !*.bat
+!*.md
 
 !tb_files/
 !do_files/
