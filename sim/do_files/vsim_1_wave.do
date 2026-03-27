@@ -38,7 +38,8 @@ add wave -noupdate /tb_adc_pa/uut/tx_mode_i
 add wave -noupdate /tb_adc_pa/uut/adc_sck_o
 add wave -noupdate /tb_adc_pa/uut/adc_conv_o
 add wave -noupdate /tb_adc_pa/uut/adc_sdo_i
-
+add wave -noupdate -position insertpoint -radix decimal sim:/tb_adc_pa/uut/delay_counter
+add wave -noupdate -position insertpoint -radix unsigned decimal sim:/tb_adc_pa/uut/measurement_counter
 # -------------------- Регистры и вспомогательные сигналы --------------------
 add wave -noupdate -divider {Registers}
 add wave -noupdate /tb_adc_pa/uut/control_reg

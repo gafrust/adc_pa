@@ -88,10 +88,12 @@ end
     $display("Calib reg 0: %h" , axi_data_o);
     axi_en_i = 0;
 
-    
-
-   #100; 
-    $finish;
-   end
+#20
+tx_active_i = 1;
+#10
+tx_active_i = 0;
+#500000;
+$finish;
+end
 
 endmodule
